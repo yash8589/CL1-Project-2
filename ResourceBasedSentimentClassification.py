@@ -162,4 +162,10 @@ for line in neg_reviews.split('$'):
 
 # added neutral thingy --> decrease in accuracy by 0.1%
 # senti word net --> line 2687 changes by yash --> after 2nd letter
-# add nahi in senti word net at some point
+# add nahi in senti word net at some point --> lines 21-23,68,73,74,99,129,143,145,165,173,180,193,199,203,205,225,259 are 1 cuz "nahi" is not in wordnet
+# negation --> 78,98,141,224,247
+# we are not considering idioms --> eg: "hawa nikal gyi" in line 106, चारों खाने चित्त --> 166
+
+# 200 sentences -->  42.64
+# 250 sentences -->  43.34
+# 271 sentences -->  43.84
