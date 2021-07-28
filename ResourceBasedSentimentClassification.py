@@ -92,48 +92,48 @@ def sentiment(text):
             return 0
 
 
-# pred_y = []
-# actual_y = []
-# # to calculate accuracy
-# pos_reviews = codecs.open("pos_hindi.txt", "r", encoding='utf-8', errors='ignore').read()
-# for line in pos_reviews.split('$'):
-#     data = line.strip('\n')
-#     if data:
-#         pred_y.append(sentiment(data))
-#         # print(pred_y)
-#         actual_y.append(1)
-#         # print(actual_y)
-# #print(accuracy_score(actual_y, pred_y) * 100)
-# print(len(actual_y))
-# neg_reviews = codecs.open("neg_hindi.txt", "r", encoding='utf-8', errors='ignore').read()
-# for line in neg_reviews.split('$'):
-#     data=line.strip('\n')
-#     if data:
-#         pred_y.append(sentiment(data))
-#         actual_y.append(-1)
-# print(len(actual_y))
-# neu_reviews = codecs.open("neu_hindi.txt", "r", encoding='utf-8', errors='ignore').read()
-# for line in neu_reviews.split('$'):
-#     data = line.strip('\n')
-#     if data:
-#         pred_y.append(sentiment(data))
-#         # print(pred_y)
-#         actual_y.append(0)
-#         # print(actual_y)
-# print(len(actual_y))
+pred_y = []
+actual_y = []
+# to calculate accuracy
+pos_reviews = codecs.open("pos_hindi.txt", "r", encoding='utf-8', errors='ignore').read()
+for line in pos_reviews.split('$'):
+    data = line.strip('\n')
+    if data:
+        pred_y.append(sentiment(data))
+        # print(pred_y)
+        actual_y.append(1)
+        # print(actual_y)
+#print(accuracy_score(actual_y, pred_y) * 100)
+print(len(actual_y))
+neg_reviews = codecs.open("neg_hindi.txt", "r", encoding='utf-8', errors='ignore').read()
+for line in neg_reviews.split('$'):
+    data=line.strip('\n')
+    if data:
+        pred_y.append(sentiment(data))
+        actual_y.append(-1)
+print(len(actual_y))
+neu_reviews = codecs.open("neu_hindi.txt", "r", encoding='utf-8', errors='ignore').read()
+for line in neu_reviews.split('$'):
+    data = line.strip('\n')
+    if data:
+        pred_y.append(sentiment(data))
+        # print(pred_y)
+        actual_y.append(0)
+        # print(actual_y)
+print(len(actual_y))
 
-# print(accuracy_score(actual_y, pred_y, normalize=True, sample_weight=None) * 100)
-# print('F-measure:  ',f1_score(actual_y,pred_y, average='micro'))
+print(accuracy_score(actual_y, pred_y, normalize=True, sample_weight=None) * 100)
+print('F-measure:  ',f1_score(actual_y,pred_y, average='micro'))
 
 
 # //////////////////////////////////////////////////
-# if __name__ == '__main__':
-#     print(sentiment("मैं इस उत्पाद से बहुत खुश हूँ  यह आराम दायक और सुन्दर है  यह खरीदने लायक है "))
-#     print(sentiment("एक दिन चुन्नू हिरण उस जंगल में रहने के लिए आया।"))
-#     print(sentiment("राम ने इनाम जीता"))
-#     print(sentiment("राम की मृत्यु हो गयी"))
-#     print(sentiment("वो बहुत खुश था"))
-#     print(sentiment(" रितेश बत्रा की 'द लंचबॉक्स' सुंदर, मर्मस्पर्शी, संवेदनशील, रियलिस्टिक और मोहक फिल्म है"))
+if __name__ == '__main__':
+    print(sentiment("मैं इस उत्पाद से बहुत खुश हूँ  यह आराम दायक और सुन्दर है  यह खरीदने लायक है "))
+    print(sentiment("एक दिन चुन्नू हिरण उस जंगल में रहने के लिए आया।"))
+    print(sentiment("राम ने इनाम जीता"))
+    print(sentiment("राम की मृत्यु हो गयी"))
+    print(sentiment("वो बहुत खुश था"))
+    print(sentiment(" रितेश बत्रा की 'द लंचबॉक्स' सुंदर, मर्मस्पर्शी, संवेदनशील, रियलिस्टिक और मोहक फिल्म है"))
     
 
 
@@ -150,11 +150,11 @@ def sentiment(text):
 
 #  testing
 
-neg_reviews = codecs.open("neg_hindi.txt", "r", encoding='utf-8', errors='ignore').read()
-for line in neg_reviews.split('$'):
-    data = line.strip('\n')
-    if data:
-        print(sentiment(data))
+# neg_reviews = codecs.open("neg_hindi.txt", "r", encoding='utf-8', errors='ignore').read()
+# for line in neg_reviews.split('$'):
+#     data = line.strip('\n')
+#     if data:
+#         print(sentiment(data))
 
 
 
@@ -169,3 +169,5 @@ for line in neg_reviews.split('$'):
 # 200 sentences -->  42.64
 # 250 sentences -->  43.34
 # 271 sentences -->  43.84
+# 350 sentences -->  45.33
+# 475 sentences -->  45.93
