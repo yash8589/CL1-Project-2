@@ -1,10 +1,11 @@
 # This module is written to do a Resource Based Semantic analyasis using hindi sentiwordnet.
 from nltk.util import pr
+from numpy.lib.function_base import average
 import pandas as pd
 import codecs
 from nltk.tokenize import word_tokenize
-# from sklearn.metrics import accuracy_score
-# from sklearn.metrics import f1_score
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import f1_score
 import re
 from spacy.lang.hi import Hindi
 
@@ -58,16 +59,16 @@ def sentiment(text):
         if word in words_dict:
             #if word in dictionary, it picks up the positive and negative score of the word
             pos_tag, pos, neg = words_dict[word]
-            print(pos_tag, pos, neg)
+            # print(pos_tag, pos, neg)
             # print(word, pos_tag, pos, neg)
             if pos_tag in allowed_words:
                 if pos > neg:
                     pos_polarity += pos
-                    print(pos_polarity)
+                    # print(pos_polarity)
                     votes.append(1)
                 elif neg > pos:
                     neg_polarity += neg
-                    print(neg_polarity)
+                    # print(neg_polarity)
                     votes.append(-1)
                 # elif neg == pos: 
                 #     # neu_polarity = pos - neg
@@ -91,34 +92,36 @@ def sentiment(text):
             return 0
 
 
-# pred_y = []
-# actual_y = []
-# # to calculate accuracy
-# pos_reviews = codecs.open("pos_hindi.txt", "r", encoding='utf-8', errors='ignore').read()
-# for line in pos_reviews.split('$'):
-#     data = line.strip('\n')
-#     if data:
-#         pred_y.append(sentiment(data))
-#         print(pred_y)
-#         actual_y.append(1)
-#         print(actual_y)
-# #print(accuracy_score(actual_y, pred_y) * 100)
-# print(len(actual_y))
-# neg_reviews = codecs.open("neg_hindi.txt", "r", encoding='utf-8', errors='ignore').read()
-# for line in neg_reviews.split('$'):
-#     data=line.strip('\n')
-#     if data:
-#         pred_y.append(sentiment(data))
-#         actual_y.append(0)
-# print(len(actual_y))
-# print(accuracy_score(actual_y, pred_y) * 100)
-# print('F-measure:  ',f1_score(actual_y,pred_y))
+pred_y = []
+actual_y = []
+# to calculate accuracy
+pos_reviews = codecs.open("pos_hindi.txt", "r", encoding='utf-8', errors='ignore').read()
+for line in pos_reviews.split('$'):
+    data = line.strip('\n')
+    if data:
+        pred_y.append(sentiment(data))
+        # print(pred_y)
+        actual_y.append(1)
+        # print(actual_y)
+#print(accuracy_score(actual_y, pred_y) * 100)
+print(len(actual_y))
+neg_reviews = codecs.open("neg_hindi.txt", "r", encoding='utf-8', errors='ignore').read()
+for line in neg_reviews.split('$'):
+    data=line.strip('\n')
+    if data:
+        pred_y.append(sentiment(data))
+        actual_y.append(-1)
+print(len(actual_y))
+print(accuracy_score(actual_y, pred_y, normalize=True, sample_weight=None) * 100)
+print('F-measure:  ',f1_score(actual_y,pred_y, average='micro'))
 
 if __name__ == '__main__':
-    # print(sentiment("मैं इस उत्पाद से बहुत खुश हूँ  यह आराम दायक और सुन्दर है  यह खरीदने लायक है "))
-    # print(sentiment("एक दिन चुन्नू हिरण उस जंगल में रहने के लिए आया।"))
-    # print(sentiment("राम ने इनाम जीता"))
+    print(sentiment("मैं इस उत्पाद से बहुत खुश हूँ  यह आराम दायक और सुन्दर है  यह खरीदने लायक है "))
+    print(sentiment("एक दिन चुन्नू हिरण उस जंगल में रहने के लिए आया।"))
+    print(sentiment("राम ने इनाम जीता"))
     print(sentiment("राम की मृत्यु हो गयी"))
+    print(sentiment("वो बहुत खुश था"))
+    
 
 
 if "भाग्यवान" in words_dict:
