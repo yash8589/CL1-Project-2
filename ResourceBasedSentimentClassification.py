@@ -122,8 +122,8 @@ for line in neu_reviews.split('$'):
         # print(actual_y)
 print(len(actual_y))
 
-print(accuracy_score(actual_y, pred_y, normalize=True, sample_weight=None) * 100)
-print('F-measure:  ',f1_score(actual_y,pred_y, average='micro'))
+print('Accuracy-score -->  ',accuracy_score(actual_y, pred_y, normalize=True, sample_weight=None) * 100)
+print('F-measure -->  ',f1_score(actual_y,pred_y, average='micro'))
 
 
 # //////////////////////////////////////////////////
@@ -161,13 +161,18 @@ if __name__ == '__main__':
 
 
 # added neutral thingy --> decrease in accuracy by 0.1%
-# senti word net --> line 2687 changes by yash --> after 2nd letter
+# senti word net --> line 2687 changes by yash for -ve words --> after 2nd letter
+# senti word net --> line 2006 changes by yash for +ve words after 7th word
+# senti word net --> line 1971 changes by prayush +ve words after 7th word
 # add nahi in senti word net at some point --> lines 21-23,68,73,74,99,129,143,145,165,173,180,193,199,203,205,225,259 are 1 cuz "nahi" is not in wordnet
 # negation --> 78,98,141,224,247
 # we are not considering idioms --> eg: "hawa nikal gyi" in line 106, चारों खाने चित्त --> 166
 
+# only changes in ned senti word net
 # 200 sentences -->  42.64
 # 250 sentences -->  43.34
 # 271 sentences -->  43.84
 # 350 sentences -->  45.33
 # 475 sentences -->  45.93
+# cahnges in both +ve and -ve word net
+# all sentences without the "nahi" condition -->  59.177
