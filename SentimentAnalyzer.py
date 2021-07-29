@@ -24,7 +24,7 @@ for i in data.index:
         words_dict[word] = (data[fields[0]][i], data[fields[2]][i], data[fields[3]][i])
     # print(words_dict)
 
-# This function determines sentiment of text.
+# This function determines Senti of text.
 
 # print(Senti("कल गुलाम राम नहीं जीता"))
 def Senti(text):
@@ -80,11 +80,141 @@ def Senti(text):
         elif pos_polarity == neg_polarity:
             seen = 0
 
+    
+
     return seen
 
 
+def condition(text, seen):
+    words = word_tokenize(text)
+    dummy = words
+    dumm1 = dummy
+    
+    if "नहीं" in words:
+        # words = words.replace("नही", 'omit')
+        # i = 0
+        # message = ""
+        # msg = ""
+        # for word in words:
+        #     if word != "नही":
+        #         message += word
+        #         i += 1
+                
+        #     else:
+        #         i+=1
+        #         for i in range(len(words)):
+        #             msg += words[i]
+        #         break
+        if (seen==1):
+            seen = -1
+        elif (seen==0):
+            seen = -1
+        else:
+            seen = 1
+    
+
+    elif "लेकिन" in dummy:
+        # dummy = dummy.replace("पर", 'omit')
+        message = ""
+        msg = ""
+        i = 0
+        for word in dummy:
+            if word != "लेकिन":
+                message += word
+                i+=1
+            else:
+                i+=1
+                for i in range(len(words)):
+                    msg += words[i]
+                break
+        if (Senti(message)== -1 and Senti(msg)== 1):
+            seen = 1
+        elif (Senti(message)== -1 and Senti(msg)==-1):
+            seen = -1
+        elif (Senti(message)== -1 and Senti(msg)== 0):
+            seen = -1
+        elif (Senti(message)== +1 and Senti(msg)== -1):
+            seen = -1
+        elif (Senti(message)== +1 and Senti(msg)== +1):
+            seen = 1
+        elif (Senti(message)== +1 and Senti(msg)== 0):
+            seen = 1
+        elif (Senti(message)== 0 and Senti(msg)== +1):
+            seen = 1
+        else:
+            seen = 0
+    elif "पर​" in dumm1:
+        # dummy = dummy.replace("पर", 'omit')
+        message = ""
+        msg = ""
+        i = 0
+        for word in dumm1:
+            if word != "पर":
+                message += word
+                i+=1
+            else:
+                i+=1
+                for i in range(len(words)):
+                    msg += words[i]
+                break
+        if (Senti(message)== -1 and Senti(msg)== 1):
+            seen = -1
+        elif (Senti(message)== -1 and Senti(msg)==-1):
+            seen = -1
+        elif (Senti(message)== -1 and Senti(msg)== 0):
+            seen = -1
+        elif (Senti(message)== +1 and Senti(msg)== -1):
+            seen = 1
+        elif (Senti(message)== +1 and Senti(msg)== +1):
+            seen = 1
+        elif (Senti(message)== +1 and Senti(msg)== 0):
+            seen = 1
+        elif (Senti(message)== 0 and Senti(msg)== +1):
+            seen = 1
+        else:
+            seen = -1
+
+    
+    return seen
+
 # to calculate accuracy and F1_score
 
+## accuracy score of 56.46%
+
+pred_y = []
+actual_y = []
+pos_reviews = codecs.open("pos_hindi.txt", "r", encoding='utf-8', errors='ignore').read()
+for line in pos_reviews.split('#'):
+    data = line.strip('\n')
+    if data:
+        pred_y.append(condition(data, Senti(data)))
+        # print(pred_y)
+        actual_y.append(1)
+        # print(actual_y)
+# print(len(actual_y))        # number of sentences taken till this point
+neg_reviews = codecs.open("neg_hindi.txt", "r", encoding='utf-8', errors='ignore').read()
+for line in neg_reviews.split('#'):
+    data=line.strip('\n')
+    if data:
+        pred_y.append(condition(data, Senti(data)))
+        actual_y.append(-1)
+# print(len(actual_y))        # number of sentences taken till this point
+neu_reviews = codecs.open("neu_hindi.txt", "r", encoding='utf-8', errors='ignore').read()
+for line in neu_reviews.split('#'):
+    data = line.strip('\n')
+    if data:
+        pred_y.append(condition(data, Senti(data)))
+        # print(pred_y)
+        actual_y.append(0)
+        # print(actual_y)
+# print(len(actual_y))        # number of sentences taken till this point
+
+print('Accuracy-score -->  ',accuracy_score(actual_y, pred_y, normalize=True, sample_weight=None) * 100)
+print('F-measure -->  ',f1_score(actual_y,pred_y, average='micro'))
+
+
+
+#accuracy score of 59%
 pred_y = []
 actual_y = []
 pos_reviews = codecs.open("pos_hindi.txt", "r", encoding='utf-8', errors='ignore').read()
@@ -119,12 +249,15 @@ print('F-measure -->  ',f1_score(actual_y,pred_y, average='micro'))
 
 # //////////////////////////////////////////////////
 if __name__ == '__main__':
+    data = "वो बहुत खुश था"
     print(Senti("मैं इस उत्पाद से बहुत खुश हूँ  यह आराम दायक और सुन्दर है  यह खरीदने लायक है "))
     print(Senti("एक दिन चुन्नू हिरण उस जंगल में रहने के लिए आया।"))
     print(Senti("राम ने इनाम जीता"))
     print(Senti("राम की मृत्यु हो गयी"))
-    print(Senti("वो बहुत खुश था"))
     print(Senti("रितेश बत्रा की 'द लंचबॉक्स' सुंदर, मर्मस्पर्शी, संवेदनशील, रियलिस्टिक और मोहक फिल्म है"))
+    print(Senti(data))
+    print(condition(data, Senti(data)))
+    
     
 
 
