@@ -249,17 +249,20 @@ print('F-measure -->  ',f1_score(actual_y,pred_y, average='micro'))
 
 # //////////////////////////////////////////////////
 if __name__ == '__main__':
-    data = "वो बहुत खुश था"
-    print(Senti("मैं इस उत्पाद से बहुत खुश हूँ  यह आराम दायक और सुन्दर है  यह खरीदने लायक है "))
-    print(Senti("एक दिन चुन्नू हिरण उस जंगल में रहने के लिए आया।"))
-    print(Senti("राम ने इनाम जीता"))
-    print(Senti("राम की मृत्यु हो गयी"))
-    print(Senti("रितेश बत्रा की 'द लंचबॉक्स' सुंदर, मर्मस्पर्शी, संवेदनशील, रियलिस्टिक और मोहक फिल्म है"))
-    print(Senti(data))
-    print(condition(data, Senti(data)))
+    data1 = "वो बहुत खुश था"                                        # positive
+    data2 = "राम की मृत्यु हो गयी"                                     # negative
+    data3 = "एक दिन चुन्नू हिरण उस जंगल में रहने के लिए आया।"            # neutral
+    print(Senti(data1))
+    print(condition(data1, Senti(data1)))
+    print(Senti(data2))
+    print(condition(data2, Senti(data2)))
+    print(Senti(data3))
+    print(condition(data3, Senti(data3)))
     
     
 
+
+## experimentations: 
 
 # if "भाग्यवान" in words_dict:
 #     pos_tag, pos, neg = words_dict["भाग्यवान"]
@@ -282,7 +285,7 @@ if __name__ == '__main__':
 
 
 
-# analysis
+# analysis during program makings
 
 # added neutral thingy --> decrease in accuracy by 0.1%
 # senti word net --> line 2687 changes by yash for -ve words --> after 2nd letter
