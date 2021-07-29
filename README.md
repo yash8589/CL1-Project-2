@@ -22,7 +22,7 @@ on the terminal to download all the requirements to run the program
 run<br>
 ```$ python .\SentimentAnalyzer.py```<br>
 OR<br>
-```python3 SentimentAnalyzer.py```<br>
+```$ python3 SentimentAnalyzer.py```<br>
 to get the sentiment analysis of text.
 
 NOTE: Write the sentence u want to analyse in the [SentimentAnalyser.py](https://github.com/yash8589/CL1-Project-2/blob/main/SentimentAnalyzer.py)
