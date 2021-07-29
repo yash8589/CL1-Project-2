@@ -14,8 +14,7 @@ data = pd.read_csv("HindiSentiWordnet.txt", delimiter=' ')
 # print(data.index)
 fields = ['POS_TAG', 'ID', 'POS', 'NEG', 'LIST_OF_WORDS']
 
-#Creating a dictionary which contain a tuple for every word. Tuple contains a list of synonyms,
-# positive score and negative score for that word.
+# making a dictionary for every word in senti word net and tagging it with it's respective pos tag and +ve and -ve score
 words_dict = {}
 for i in data.index:
     # print (data[fields[0]][i], data[fields[1]][i], data[fields[2]][i], data[fields[3]][i], data[fields[4]][i])
